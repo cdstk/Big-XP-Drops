@@ -1,18 +1,21 @@
 package bigxpdrops.mixin.vanilla;
 
+import bigxpdrops.handlers.ForgeConfigHandler;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import net.minecraft.entity.item.EntityXPOrb;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(EntityXPOrb.class)
 public abstract class EntityXPOrbMixin {
 
-    @ModifyConstant(
-            method = "getXPSplit",
-            constant = @Constant(intValue = 2477, ordinal = 1)
+    @WrapMethod(
+            method = "getXPSplit"
     )
-    private static int bigXPDrops_vanillaEntityXPOrb_getXPSplitBigDrop(int constant, int expValue){
-        return expValue;
+    private static int bigXPDrops_vanillaEntityXPOrb_getXPSplitBigDrop(int expValue, Operation<Integer> original){
+        if(expValue >= ForgeConfigHandler.server.bigStartThreshold) {
+            return expValue;
+        }
+        return original.call(expValue);
     }
 }

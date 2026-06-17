@@ -1,12 +1,12 @@
 {
   "required": true,
-  "package": "replacememodid.mixin",
-  "refmap": "mixins.replacememodid.refmap.json",
+  "package": "bigxpdrops.mixin",
+  "refmap": "mixins.bigxpdrops.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "target": "@env(DEFAULT)",
   "minVersion": "0.8",
   "mixins": [
-    "vanilla.EntityPlayerMixin"
+    "vanilla.EntityXPOrbMixin"
   ],
   "injectors": {
     "maxShiftBy": 10
